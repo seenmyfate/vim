@@ -82,7 +82,7 @@ map <leader>v :view %%
 
 " Seriously, guys. It's not like :W is bound to anything anyway.
 command! W :w
-
+command! Wq :wq
 " it's vim goddamnit
 map <Left> :echo "no!"<cr>
 map <Right> :echo "no!"<cr>
@@ -190,6 +190,12 @@ autocmd BufReadPost *
   \ endif
 augroup END
 
+" Resize windows quickly
+nmap <c-w>l :vertical res +20<cr>
+nmap <c-w>h :vertical res -20<cr>
+nmap <c-w>j :res +20<cr>
+nmap <c-w>k :res -20<cr>
+
 " Scroll other window
 function! ScrollOtherWindowDown(count)
   normal! 
@@ -201,6 +207,6 @@ function! ScrollOtherWindowUp(count)
   normal! 
   normal! 
 endfunction
-nnoremap g<c-y> :call ScrollOtherWindowUp(v:count)<cr>
-nnoremap g<c-e> :call ScrollOtherWindowDown(v:count)<cr>
+nnoremap <c-w>y :call ScrollOtherWindowUp(v:count)<cr>
+nnoremap <c-w>e :call ScrollOtherWindowDown(v:count)<cr>
 
