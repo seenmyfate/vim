@@ -73,10 +73,6 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-" nicer shortcut to resize split windows
-map <c-n> <c-w><
-map <c-m> <c-w>>
-
 " open split scratch buffer
 nmap <leader>; :Sscratch<cr>
 
@@ -193,4 +189,18 @@ autocmd BufReadPost *
   \   exe "normal g`\"" |
   \ endif
 augroup END
+
+" Scroll other window
+function! ScrollOtherWindowDown(count)
+  normal! 
+  normal! 
+  normal! 
+endfunction
+function! ScrollOtherWindowUp(count)
+  normal! 
+  normal! 
+  normal! 
+endfunction
+nnoremap g<c-y> :call ScrollOtherWindowUp(v:count)<cr>
+nnoremap g<c-e> :call ScrollOtherWindowDown(v:count)<cr>
 
