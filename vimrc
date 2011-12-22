@@ -25,7 +25,7 @@ set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 set wildmenu
-set wildignore+=*.o,*.obj,.bundle,.git,*.rbc,*.class,.svn,vendor/gems/*,vendor/rails/*,coverage/
+set wildignore+=*.o,*.obj,.bundle,coverage,_html,.git,*.rbc,*.class,.svn,vendor/gems/*,vendor/rails/*
 
 "" Colors
 set term=xterm-256color
@@ -45,6 +45,7 @@ set showtabline=2               " always show tab bar
 let mapleader=","               " use , as leader instead of backslash
 
 " CTags
+" navigate with <c-]> / <c-t>
 map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
 map <C-\> :tnext<CR>
 
@@ -79,16 +80,9 @@ map <c-m> <c-w>>
 " open split scratch buffer
 nmap <leader>; :Sscratch<cr>
 
-" " double percentage sign in command mode is expanded
-" " to directory of current file - http://vimcasts.org/e/14
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-
 " edit or view in same dir
 map <leader>e :edit %%
 map <leader>v :view %%
-
-" use open buffer
-set switchbuf=useopen
 
 " Seriously, guys. It's not like :W is bound to anything anyway.
 command! W :w
