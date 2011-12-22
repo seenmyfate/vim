@@ -3,41 +3,46 @@
 " github.com/carlhuda/janus
 " vimcasts.org
 " vim.wikia.com
+" for more info on any settings
+" :help <command> eg
+" :help showcmd
 
 call pathogen#infect()          " load pathogen
 set nocompatible                " choose no compatibility with legacy vi
-set encoding=utf-8
+set encoding=utf-8              " sensible encoding
 set showcmd                     " display incomplete commands
 filetype plugin indent on       " load file type plugins + indentation
-set number
-set ruler
+set number                      " need those line numbers
+set ruler                       " show the line/column number of the cursor position
 
 "" Whitespace
-set nowrap                      " don't wrap lines, switch with set wrap!
+set wrap                        " wrap lines, switch with set nowrap
+set textwidth=78                "
+set linebreak                   " break line for wrapping at end of a word
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
-set scrolloff=3
+set scrolloff=3                 " Minimum number of screen lines to keep above/below the cursor
 
 "" Searching
 set hlsearch                    " highlight matches
 set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
-set wildmenu
+set wildmenu                    " enhanced command line completion
 set wildignore+=*.o,*.obj,.bundle,coverage,_html,.git,*.rbc,*.class,.svn,vendor/gems/*,vendor/rails/*
 
 "" Colors
 set term=xterm-256color
 syntax enable
 set background=dark             " or light
-colorscheme solarized
+colorscheme solarized           " can't work with anything else
 highlight LineNr ctermfg=darkgrey
 set cursorline                  " highlight current line
 
 " Window
-set cmdheight=2
-set laststatus=2
+set cmdheight=2                 " number of lines for the command line
+set laststatus=2                " always have a status line
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 set showtabline=2               " always show tab bar
 
@@ -65,7 +70,7 @@ nmap T :tabnew<cr>
 
 " Splits
 " quick split and jump into window
-map :vs :vsplit<cr><c-w>l
+map :vs :vsplit<cr><c-l>
 
 " easier navigation between split windows
 nnoremap <c-j> <c-w>j
@@ -80,14 +85,15 @@ nmap <leader>; :Sscratch<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
 
-" Seriously, guys. It's not like :W is bound to anything anyway.
+" Remap clumsy attemtps to write and quit
 command! W :w
 command! Wq :wq
-" it's vim goddamnit
-map <Left> :echo "no!"<cr>
-map <Right> :echo "no!"<cr>
-map <Up> :echo "no!"<cr>
-map <Down> :echo "no!"<cr>
+
+" force vim
+map <Left> :echo "damnit!"<cr>
+map <Right> :echo "you suck!"<cr>
+map <Up> :echo "this is why you fail"<cr>
+map <Down> :echo "nooooo!"<cr>
 
 " Plugin mappings
 " Fugutive shortcuts
@@ -191,6 +197,7 @@ autocmd BufReadPost *
 augroup END
 
 " Resize windows quickly
+" reset with <c-w>=
 nmap <c-w>l :vertical res +20<cr>
 nmap <c-w>h :vertical res -20<cr>
 nmap <c-w>j :res +20<cr>
