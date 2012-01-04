@@ -104,20 +104,6 @@ map :gd :Gdiff<cr>
 "  Ack
 map <leader>/ :Ack<space>
 
-" Remap the tab key to do autocompletion or indentation depending on the
-" context (from http://www.vim.org/tips/tip.php?tip_id=102)
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
-
-
 " Map keys to go to specific files
 map <leader>gr :topleft :split config/routes.rb<cr>
 function! ShowRoutes()
@@ -200,7 +186,6 @@ augroup END
 " reset with <c-w>=
 nmap <leader>hh :vertical res +20<cr>
 nmap <leader>ll :vertical res -20<cr>
-
 " Scroll other window
 function! ScrollOtherWindowDown(count)
   normal! 
