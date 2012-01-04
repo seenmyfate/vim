@@ -198,10 +198,8 @@ augroup END
 
 " Resize windows quickly
 " reset with <c-w>=
-nmap <c-w>l :vertical res +20<cr>
-nmap <c-w>h :vertical res -20<cr>
-nmap <c-w>j :res +20<cr>
-nmap <c-w>k :res -20<cr>
+nmap <leader>hh :vertical res +20<cr>
+nmap <leader>ll :vertical res -20<cr>
 
 " Scroll other window
 function! ScrollOtherWindowDown(count)
