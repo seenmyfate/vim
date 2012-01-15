@@ -364,4 +364,5 @@ snippet bef
 	end
 snippet let
 	let(:${1:var}) { ${2:object} }
-
+snippet sh
+	${1}.should_receive(:${2}).with(${3}).and_return(${4})

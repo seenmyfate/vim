@@ -30,7 +30,7 @@ set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 set wildmenu                    " enhanced command line completion
-set wildignore+=*.o,*.obj,.bundle,coverage,_html,.git,*.rbc,*.class,.svn,vendor/gems/*,vendor/rails/*
+set wildignore+=*.o,*.obj,.bundle,coverage,.DS_Store,_html,.git,*.rbc,*.class,.svn,vendor/gems/*,vendor/rails/*
 
 "" Colors
 set term=xterm-256color
@@ -103,6 +103,9 @@ map :gd :Gdiff<cr>
 
 "  Ack
 map <leader>/ :Ack<space>
+
+" Powerline
+let g:Powerline_symbols = 'fancy'
 
 " Map keys to go to specific files
 map <leader>gr :topleft :split config/routes.rb<cr>
