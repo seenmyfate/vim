@@ -8,6 +8,7 @@
 " :help showcmd
 
 call pathogen#infect()          " load pathogen
+set shell=/bin/sh               " rvm/zsh hack
 set nocompatible                " choose no compatibility with legacy vi
 set encoding=utf-8              " sensible encoding
 set showcmd                     " display incomplete commands
