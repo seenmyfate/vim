@@ -85,9 +85,10 @@ nmap <leader>; :Sscratch<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
 
-" Remap clumsy attemtps to write and quit
+" Remap shift key failure
 command! W :w
 command! Wq :wq
+command! E :e
 
 " force vim
 map <Left> :echo "damnit!"<cr>
