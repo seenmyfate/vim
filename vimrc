@@ -8,22 +8,24 @@
 " :help showcmd
 
 call pathogen#infect()          " load pathogen
-set shell=/bin/sh               " rvm/zsh hack
 set nocompatible                " choose no compatibility with legacy vi
 set encoding=utf-8              " sensible encoding
 set showcmd                     " display incomplete commands
 filetype plugin indent on       " load file type plugins + indentation
 set number                      " need those line numbers
 set ruler                       " show the line/column number of the cursor position
-
+set shell=sh                    " hack for rvm
 "" Whitespace
-set wrap                        " wrap lines, switch with set nowrap
+set nowrap                      " wrap lines, switch with set nowrap
 set textwidth=78                "
 set linebreak                   " break line for wrapping at end of a word
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set scrolloff=3                 " Minimum number of screen lines to keep above/below the cursor
+
+" indent code inside p tags
+autocmd TabEnter,WinEnter,BufWinEnter *.html,*.erb let g:html_indent_tags = g:html_indent_tags.'\|p'
 
 "" Searching
 set hlsearch                    " highlight matches
@@ -46,8 +48,9 @@ set cmdheight=2                 " number of lines for the command line
 set laststatus=2                " always have a status line
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 set showtabline=2               " always show tab bar
+set winwidth=84                 " 
 
-"" Mappings
+" Mappings
 let mapleader=","               " use , as leader instead of backslash
 
 " CTags
