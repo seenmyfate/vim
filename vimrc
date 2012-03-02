@@ -16,13 +16,17 @@ set number                      " need those line numbers
 set ruler                       " show the line/column number of the cursor position
 set shell=sh                    " hack for rvm
 "" Whitespace
-set nowrap                      " wrap lines, switch with set nowrap
+set nowrap                      " wrap lines, switch with set wrap/nowrap
 set textwidth=78                "
 set linebreak                   " break line for wrapping at end of a word
-set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
-set expandtab                   " use spaces, not tabs (optional)
+set tabstop=2 shiftwidth=2      " a tab is two spaces
+set expandtab                   " use spaces
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set scrolloff=3                 " Minimum number of screen lines to keep above/below the cursor
+
+" Store temporary files in a central spot
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " indent code inside p tags
 autocmd TabEnter,WinEnter,BufWinEnter *.html,*.erb let g:html_indent_tags = g:html_indent_tags.'\|p'
@@ -140,7 +144,7 @@ function! RunTests(filename)
     :w
     :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
     if match(a:filename, '\.feature$') != -1
-        exec ":!bundle exec cucumber " . a:filename
+        exec ":!bundle exec cucumber --require features " . a:filename
     else
         if filereadable("script/test")
             exec ":!script/test " . a:filename
