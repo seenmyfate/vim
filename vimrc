@@ -144,7 +144,7 @@ function! RunTests(filename)
     :w
     :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
     if match(a:filename, '\.feature$') != -1
-        exec ":!bundle exec cucumber --require features " . a:filename
+        exec ":!bundle exec cucumber --require features --format progress " . a:filename
     else
         if filereadable("script/test")
             exec ":!script/test " . a:filename
@@ -196,8 +196,8 @@ augroup END
 
 " Resize windows quickly
 " reset with <c-w>=
-nmap <leader>hh :vertical res +20<cr>
-nmap <leader>ll :vertical res -20<cr>
+nmap <leader>H :vertical res +20<cr>
+nmap <leader>L :vertical res -20<cr>
 " Scroll other window
 function! ScrollOtherWindowDown(count)
   normal! 
