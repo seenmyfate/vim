@@ -17,7 +17,6 @@ set ruler                       " show the line/column number of the cursor posi
 set shell=sh                    " hack for rvm
 "" Whitespace
 set nowrap                      " wrap lines, switch with set wrap/nowrap
-set textwidth=78                "
 set linebreak                   " break line for wrapping at end of a word
 set tabstop=2 shiftwidth=2      " a tab is two spaces
 set expandtab                   " use spaces
@@ -28,8 +27,28 @@ set scrolloff=3                 " Minimum number of screen lines to keep above/b
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
-" indent code inside p tags
-autocmd TabEnter,WinEnter,BufWinEnter *.html,*.erb let g:html_indent_tags = g:html_indent_tags.'\|p'
+augroup vimrcEx
+  " Clear all autocmds in the group
+  autocmd!
+  autocmd FileType text setlocal textwidth=78
+  " Jump to last cursor position unless it's invalid or in an event handler
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  "for ruby, autoindent with two spaces, always expand tabs
+  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+  autocmd FileType python set sw=4 sts=4 et
+
+  autocmd! BufRead,BufNewFile *.sass setfiletype sass 
+
+  autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
+  autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
+
+  " Indent p tags
+  autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
+augroup END
 
 "" Searching
 set hlsearch                    " highlight matches
@@ -70,6 +89,9 @@ map <leader>s :%s/\s\+$//<CR>
 
 " clear the search buffer
 nnoremap <CR> :nohlsearch<cr>
+
+" Make <leader>' switch between ' and "
+nnoremap <leader>' ""yls<c-r>={'"': "'", "'": '"'}[@"]<cr><esc>
 
 " Tabs
 nmap <leader>[ :tabprevious<cr>
@@ -137,6 +159,33 @@ endfunction
 map <leader>gR :call ShowRoutes()<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
 
+" Switch between test and production code
+function! OpenTestAlternate()
+  let new_file = AlternateForCurrentFile()
+  exec ':e ' . new_file
+endfunction
+function! AlternateForCurrentFile()
+  let current_file = expand("%")
+  let new_file = current_file
+  let in_spec = match(current_file, '^spec/') != -1
+  let going_to_spec = !in_spec
+  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1
+  if going_to_spec
+    if in_app
+      let new_file = substitute(new_file, '^app/', '', '')
+    end
+    let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
+    let new_file = 'spec/' . new_file
+  else
+    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
+    let new_file = substitute(new_file, '^spec/', '', '')
+    if in_app
+      let new_file = 'app/' . new_file
+    end
+  endif
+  return new_file
+endfunction
+nnoremap <leader>. :call OpenTestAlternate()<cr>
 
 " Running tests
 function! RunTests(filename)
