@@ -26,7 +26,8 @@ set scrolloff=3                 " Minimum number of screen lines to keep above/b
 " Store temporary files in a central spot
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-
+" remember more commands and search history
+set history=10000
 augroup vimrcEx
   " Clear all autocmds in the group
   autocmd!
@@ -99,6 +100,9 @@ nmap <leader>] :tabNext<cr>
 nmap T :tabnew<cr>
 
 " Splits
+" open tests in new split
+map <leader>v :vs<cr>,.
+
 " quick split and jump into window
 map :vs :vsplit<cr><c-l>
 
@@ -111,9 +115,8 @@ nnoremap <c-l> <c-w>l
 " open split scratch buffer
 nmap <leader>; :Sscratch<cr>
 
-" edit or view in same dir
+" edit in same dir
 map <leader>e :edit %%
-map <leader>v :view %%
 
 " Remap shift key failure
 command! W :w
