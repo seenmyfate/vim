@@ -58,6 +58,7 @@ set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 set wildmenu                    " enhanced command line completion
 set wildignore+=*.o,*.obj,.bundle,coverage,.DS_Store,_html,.git,*.rbc,*.class,.svn,vendor/gems/*,vendor/rails/*
+set complete=.,t                " use tags for completion
 
 "" Colors
 set term=xterm-256color
@@ -79,7 +80,7 @@ let mapleader=","               " use , as leader instead of backslash
 
 " CTags
 " navigate with <c-]> / <c-t>
-map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+map <Leader>rt :!ctags --exclude=_html --exclude=tmp --exclude=log --exclude=coverage --extra=+f -R *<CR><CR>
 map <C-\> :tnext<CR>
 
 " switch most recent buffers
@@ -263,4 +264,5 @@ function! ScrollOtherWindowUp(count)
 endfunction
 nnoremap <c-w>y :call ScrollOtherWindowUp(v:count)<cr>
 nnoremap <c-w>e :call ScrollOtherWindowDown(v:count)<cr>
+
 
