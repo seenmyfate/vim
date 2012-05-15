@@ -28,6 +28,14 @@ snippet bt
 	belongs_to :${1:association}
 snippet crw
 	cattr_accessor :${1:attr_names}
+snippet defi
+	def initialize
+		${1}
+	end${2}
+snippet defp
+	def initialize(${1})
+		${2}
+	end${3}
 snippet defcreate
 	def create
 		@${1:model_class_name} = ${2:ModelClassName}.new(params[:$1])
@@ -351,18 +359,23 @@ snippet desc
 		${2}
 	end
 snippet it
-	it "${1:should do something}" do
+	it "${1}" do
 		${2}
-	end
+	end${3}
 snippet con
-	context "${1:context}" do
+	context "${1}" do
 		${2}
-	end
+	end${3}
 snippet bef
 	before do
 		${1}
-	end
+	end${2}
 snippet let
-	let(:${1:var}) { ${2:object} }
+	let(:${1:var}) { ${2:object} }${3}
 snippet sh
-	${1}.should_receive(:${2}).with(${3}).and_return(${4})
+	should_receive(:${1}).with(${2}).and_return(${3})${4}
+snippet sce
+	Scenario:
+		${1:Given} ${2}
+		${3:When} ${4}
+		${5:Then} $6
