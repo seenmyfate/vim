@@ -90,6 +90,9 @@ nnoremap <leader><leader> <c-^>
 " remove whitespace
 map <leader>s :%s/\s\+$//<CR>
 
+" replace :ruby => 'syntax' with ruby: 'syntax'
+map <leader>pp :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<cr>
+
 " clear the search buffer
 nnoremap <CR> :nohlsearch<cr>
 
@@ -97,8 +100,8 @@ nnoremap <CR> :nohlsearch<cr>
 nnoremap <leader>' ""yls<c-r>={'"': "'", "'": '"'}[@"]<cr><esc>
 
 " Tabs
-nmap <leader>[ :tabprevious<cr>
-nmap <leader>] :tabNext<cr>
+nmap <leader>] :tabn<cr>
+nmap <leader>[ :tabp<cr>
 nmap T :tabnew<cr>
 
 " Splits
@@ -142,6 +145,9 @@ map <leader>/ :Ack<space>
 
 " Powerline
 let g:Powerline_symbols = 'fancy'
+
+" Run
+map <leader>r :!ruby % -v<cr>
 
 " Map keys to go to specific files
 map <leader>gr :topleft :split config/routes.rb<cr>
