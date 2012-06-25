@@ -371,9 +371,13 @@ snippet bef
 		${1}
 	end${2}
 snippet let
-	let(:${1:var}) { ${2:object} }${3}
+	let(:${1}) { ${2} }${3}
 snippet sh
-	should_receive(:${1}).with(${2}).and_return(${3})${4}
+	should_receive(:${1})${2}
+snippet wi
+	with(${1})${2}
+snippet an
+	and_return(${1})${2}
 snippet sce
 	Scenario:
 		${1:Given} ${2}
