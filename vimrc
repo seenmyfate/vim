@@ -84,6 +84,12 @@ let mapleader=","               " use , as leader instead of backslash
 map <Leader>rt :!ctags --exclude=public --exclude=_html --exclude=tmp --exclude=log --exclude=coverage --extra=+f -R *<CR><CR>
 map <C-\> :tnext<CR>
 
+" CtrlP
+" Open CtrlP in buffer mode
+nnoremap <c-b> :CtrlPBuffer<cr>      
+" Open CtrlP in recent files mode
+nnoremap <c-f> :CtrlPMRU<cr>
+
 " switch most recent buffers
 nnoremap <leader><leader> <c-^> 
 
@@ -127,6 +133,11 @@ map <leader>e :edit %%
 command! W :w
 command! Wq :wq
 command! E :e
+
+" Retain indent when pasting code
+nnoremap <leader>pt :set invpaste paste?<CR>
+set pastetoggle=<leader>pt
+set showmode
 
 " force vim
 map <Left> :echo "damnit!"<cr>
