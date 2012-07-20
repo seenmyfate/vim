@@ -75,6 +75,7 @@ set laststatus=2                " always have a status line
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 set showtabline=2               " always show tab bar
 set winwidth=84                 " 
+set colorcolumn=80              " highlight at 80 characters
 
 " Mappings
 let mapleader=","               " use , as leader instead of backslash
