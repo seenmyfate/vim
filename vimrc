@@ -46,7 +46,7 @@ augroup vimrcEx
 
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
-
+  
   " Indent p tags
   autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
 augroup END
@@ -139,6 +139,9 @@ command! E :e
 nnoremap <leader>pt :set invpaste paste?<CR>
 set pastetoggle=<leader>pt
 set showmode
+
+" use OS clipboard
+"set clipboard=unnamed
 
 " force vim
 map <Left> :echo "damnit!"<cr>
@@ -283,5 +286,4 @@ function! ScrollOtherWindowUp(count)
 endfunction
 nnoremap <c-w>y :call ScrollOtherWindowUp(v:count)<cr>
 nnoremap <c-w>e :call ScrollOtherWindowDown(v:count)<cr>
-
 
