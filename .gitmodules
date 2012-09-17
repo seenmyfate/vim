@@ -31,3 +31,6 @@
 [submodule "bundle/cucumber"]
 	path = bundle/cucumber
 	url = https://github.com/tpope/vim-cucumber.git
+[submodule "bundle/surround"]
+	path = bundle/surround
+	url = https://github.com/tpope/vim-surround.git
