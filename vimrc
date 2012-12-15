@@ -82,14 +82,9 @@ let mapleader=","               " use , as leader instead of backslash
 
 " CTags
 " navigate with <c-]> / <c-t>
-map <Leader>rt :!ctags --exclude=public --exclude=_html --exclude=tmp --exclude=log --exclude=coverage --extra=+f -R *<CR><CR>
+map <Leader>rt :!ctags --exclude=public --exclude=spec --exclude=_html --exclude=tmp --exclude=log --exclude=coverage --extra=+f -R *<CR><CR>
 map <C-\> :tnext<CR>
-
-" CtrlP
-" Open CtrlP in buffer mode
-nnoremap <c-b> :CtrlPBuffer<cr>      
-" Open CtrlP in recent files mode
-nnoremap <c-f> :CtrlPMRU<cr>
+map <C-'> :tprev<CR>
 
 " switch most recent buffers
 nnoremap <leader><leader> <c-^> 
@@ -195,7 +190,7 @@ function! AlternateForCurrentFile()
   let new_file = current_file
   let in_spec = match(current_file, '^spec/') != -1
   let going_to_spec = !in_spec
-  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1
+  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1 || match(current_file, '\<decorators\>') != -1 || match(current_file, '\<helpers\>') != -1
   if going_to_spec
     if in_app
       let new_file = substitute(new_file, '^app/', '', '')
@@ -268,22 +263,4 @@ autocmd BufReadPost *
   \   exe "normal g`\"" |
   \ endif
 augroup END
-
-" Resize windows quickly
-" reset with <c-w>=
-nmap <leader>H :vertical res +20<cr>
-nmap <leader>L :vertical res -20<cr>
-" Scroll other window
-function! ScrollOtherWindowDown(count)
-  normal! 
-  normal! 
-  normal! 
-endfunction
-function! ScrollOtherWindowUp(count)
-  normal! 
-  normal! 
-  normal! 
-endfunction
-nnoremap <c-w>y :call ScrollOtherWindowUp(v:count)<cr>
-nnoremap <c-w>e :call ScrollOtherWindowDown(v:count)<cr>
 
