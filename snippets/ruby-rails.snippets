@@ -354,32 +354,3 @@ snippet des
 	describe "${1:subject}" do
 		${2}
 	end
-snippet desc
-	describe "${1:subject}" do
-		${2}
-	end
-snippet it
-	it "${1}" do
-		${2}
-	end${3}
-snippet con
-	context "${1}" do
-		${2}
-	end${3}
-snippet bef
-	before do
-		${1}
-	end${2}
-snippet let
-	let(:${1}) { ${2} }${3}
-snippet sh
-	should_receive(:${1})${2}
-snippet wi
-	with(${1})${2}
-snippet an
-	and_return(${1})${2}
-snippet sce
-	Scenario:
-		${1:Given} ${2}
-		${3:When} ${4}
-		${5:Then} $6
