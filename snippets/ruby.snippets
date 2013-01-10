@@ -1,0 +1,40 @@
+#rspec
+snippet it
+	it "${1:spec_name}" do
+		${2}
+	end
+snippet itp
+	it "${1:spec_name}"
+	${2}
+snippet desc
+	describe ${1:class_name} do
+		${2}
+	end
+snippet cont
+	context "${1:message}" do
+		${2}
+	end
+snippet bef
+	before :${1:each} do
+		${2}
+	end
+snippet aft
+	after :${1:each} do
+		${2}
+	end
+snippet let
+	let(:${1}) { ${2} }
+	${3}
+snippet sh
+	should_receive(:${1})${2}
+snippet wi
+	with(${1})${2}
+snippet an
+	and_return(${1})${2}
+	${3}
+snippet sce
+	Scenario:
+		${1:Given} ${2}
+		${3:When} ${4}
+		${5:Then} ${6}
+	${7}
