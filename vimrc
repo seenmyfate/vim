@@ -68,6 +68,10 @@ set background=dark             " or light
 colorscheme solarized           " can't work with anything else
 highlight LineNr ctermfg=darkgrey
 set cursorline                  " highlight current line
+set list                        " turn on invisible characters
+set listchars=tab:▸\ ,trail:▝   " which characters to highlight
+highlight NonText guifg=#444444
+highlight SpecialKey guifg=#444444
 
 " Window
 set cmdheight=2                 " number of lines for the command line
