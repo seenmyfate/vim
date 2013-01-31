@@ -1,6 +1,5 @@
 " github.com/garybernhardt/dotfiles
 " github.com/mislav/vimfiles
-" github.com/carlhuda/janus
 " vimcasts.org
 " vim.wikia.com
 " for more info on any settings
@@ -21,7 +20,7 @@ set linebreak                   " break line for wrapping at end of a word
 set tabstop=2 shiftwidth=2      " a tab is two spaces
 set expandtab                   " use spaces
 set backspace=indent,eol,start  " backspace through everything in insert mode
-set scrolloff=3                 " Minimum number of screen lines to keep above/below the cursor
+set scrolloff=999               " Keep the cursor in the middle of the screen
 
 " Store temporary files in a central spot
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -40,13 +39,12 @@ augroup vimrcEx
 
   "for ruby, autoindent with two spaces, always expand tabs
   autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
-  autocmd FileType python set sw=4 sts=4 et
 
-  autocmd! BufRead,BufNewFile *.sass setfiletype sass 
+  autocmd! BufRead,BufNewFile *.sass setfiletype sass
 
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
-  
+
   " Indent p tags
   autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
 augroup END
@@ -57,7 +55,7 @@ set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 set wildmenu                    " enhanced command line completion
-set wildignore+=*.o,*.obj,.bundle,coverage,.DS_Store,_html,.git,*.rbc,*.class,.svn,vendor/gems/*,vendor/rails/*
+set wildignore+=*.o,*.obj,.bundle,coverage,doc,.DS_Store,_html,.git,*.rbc,*.class,.svn,vendor/gems/*,vendor/rails/*
 set complete=.,w,b,u,t          " don't complete with included files (i)
 set foldmethod=manual           " for super fast autocomplete
 
@@ -78,7 +76,7 @@ set cmdheight=2                 " number of lines for the command line
 set laststatus=2                " always have a status line
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 set showtabline=2               " always show tab bar
-set winwidth=84                 " 
+set winwidth=84                 "
 set colorcolumn=80              " highlight at 80 characters
 
 " Mappings
@@ -91,7 +89,7 @@ map <C-\> :tnext<CR>
 map <C-'> :tprev<CR>
 
 " switch most recent buffers
-nnoremap <leader><leader> <c-^> 
+nnoremap <leader><leader> <c-^>
 
 " remove whitespace
 map <leader>s :%s/\s\+$//<CR>
@@ -122,9 +120,6 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
-
-" open split scratch buffer
-nmap <leader>; :Sscratch<cr>
 
 " edit in same dir
 map <leader>e :edit %%
