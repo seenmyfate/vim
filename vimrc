@@ -21,6 +21,7 @@ set tabstop=2 shiftwidth=2      " a tab is two spaces
 set expandtab                   " use spaces
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set scrolloff=999               " Keep the cursor in the middle of the screen
+"set noesckeys                   " no arrow keys in insert mode
 
 " Store temporary files in a central spot
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -88,6 +89,10 @@ map <Leader>rt :!ctags --exclude=public --exclude=spec --exclude=_html --exclude
 map <C-\> :tnext<CR>
 map <C-'> :tprev<CR>
 
+" navigate buffers
+nmap <C-n> :bnext<CR>
+nmap <C-b> :bprev<CR>
+
 " switch most recent buffers
 nnoremap <leader><leader> <c-^>
 
@@ -142,6 +147,11 @@ map <Left> :echo "damnit!"<cr>
 map <Right> :echo "you suck!"<cr>
 map <Up> :echo "this is why you fail"<cr>
 map <Down> :echo "nooooo!"<cr>
+
+" evil mode
+
+" ctrl-p buffer search
+:nmap ; :CtrlPBuffer<CR>
 
 " Plugin mappings
 " Fugutive shortcuts
