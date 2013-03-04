@@ -149,6 +149,10 @@ map <Up> :echo "this is why you fail"<cr>
 map <Down> :echo "nooooo!"<cr>
 
 " evil mode
+inoremap <Left> <nop>
+inoremap <Right> <nop>
+inoremap <Up> <nop>
+inoremap <Down> <nop>
 
 " ctrl-p buffer search
 :nmap ; :CtrlPBuffer<CR>
