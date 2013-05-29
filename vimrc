@@ -102,6 +102,9 @@ map <leader>s :%s/\s\+$//<CR>
 " replace :ruby => 'syntax' with ruby: 'syntax'
 map <leader>pp :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<cr>
 
+" symbolize string
+map <leader>ps :%s/[''"]\(\w\+\)[''"]/:\1/g<cr>
+
 " clear the search buffer
 nnoremap <CR> :nohlsearch<cr>
 
