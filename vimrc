@@ -172,6 +172,9 @@ map <leader>/ :Ack<space>
 " Powerline
 let g:Powerline_symbols = 'fancy'
 
+" Open Markdown files in Marked.app
+nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>:redraw!<cr>
+
 " Run
 map <leader>r :!ruby % -v<cr>
 
@@ -226,11 +229,12 @@ nnoremap <leader>. :call OpenTestAlternate()<cr>
 
 " Running tests
 map <Leader>t :call RunCurrentSpecFile()<cr>
-map <Leader>s :call RunNearestSpec()<cr>
+map <Leader>T :call RunNearestSpec()<cr>
 map <Leader>l :call RunLastSpec()<cr>
 map <Leader>a :call RunAllSpecs()<cr>
 
-let g:rspec_command = "!bundle exec rspec --color {spec}"
+" run tests with Dispatch
+"let g:rspec_command = "rspec {spec}; sleep 1;"
 
  " When editing a file, always jump to the last known cursor position.
 autocmd BufReadPost *
