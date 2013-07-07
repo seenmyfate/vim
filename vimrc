@@ -45,6 +45,7 @@ augroup vimrcEx
 
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
+  autocmd FileType markdown setlocal wrap
 
   " Indent p tags
   autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
@@ -88,6 +89,8 @@ let mapleader=","               " use , as leader instead of backslash
 map <Leader>rt :!ctags --exclude=public --exclude=spec --exclude=_html --exclude=tmp --exclude=log --exclude=coverage --extra=+f -R *<CR><CR>
 map <C-\> :tnext<CR>
 map <C-'> :tprev<CR>
+" exclude javascript files
+let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
 " navigate buffers
 nmap <C-n> :bnext<CR>
@@ -159,6 +162,7 @@ inoremap <Down> <nop>
 
 " ctrl-p buffer search
 :nmap ; :CtrlPBuffer<CR>
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 " Plugin mappings
 " Fugutive shortcuts
@@ -168,6 +172,9 @@ map :gd :Gdiff<cr>
 
 "  Ack
 map <leader>/ :Ack<space>
+
+" Use the silver searcher
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Powerline
 let g:Powerline_symbols = 'fancy'
