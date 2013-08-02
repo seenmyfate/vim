@@ -46,6 +46,7 @@ augroup vimrcEx
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd FileType markdown setlocal wrap
+  autocmd FileType qf setlocal wrap
 
   " Indent p tags
   autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
@@ -86,7 +87,7 @@ let mapleader=","               " use , as leader instead of backslash
 
 " CTags
 " navigate with <c-]> / <c-t>
-map <Leader>rt :!ctags --exclude=public --exclude=spec --exclude=_html --exclude=tmp --exclude=log --exclude=coverage --extra=+f -R *<CR><CR>
+map <Leader>ct :!ctags --exclude=public --exclude=spec --exclude=_html --exclude=tmp --exclude=log --exclude=coverage --extra=+f -R *<CR><CR>
 map <C-\> :tnext<CR>
 map <C-'> :tprev<CR>
 " exclude javascript files
@@ -239,9 +240,11 @@ map <Leader>t :call RunCurrentSpecFile()<cr>
 map <Leader>T :call RunNearestSpec()<cr>
 map <Leader>l :call RunLastSpec()<cr>
 map <Leader>a :call RunAllSpecs()<cr>
+map <leader>u :!ruby -I"lib:test" %<cr>
 
 " run tests with Dispatch
-"let g:rspec_command = "rspec {spec}; sleep 1;"
+"let g:rspec_command = "Dispatch rspec {spec}; sleep 1;"
+let g:rspec_command = "!bundle exec rspec {spec}"
 
  " When editing a file, always jump to the last known cursor position.
 autocmd BufReadPost *
