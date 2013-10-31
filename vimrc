@@ -39,9 +39,11 @@ augroup vimrcEx
     \ endif
 
   "for ruby, autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+  autocmd FileType ruby,haml,eruby,yaml,html,javascript,cucumber set ai sw=2 sts=2 et
 
-  autocmd! BufRead,BufNewFile *.sass setfiletype sass
+  autocmd! BufRead,BufNewFile *.scss setfiletype scss
+  autocmd! BufRead,BufNewFile *.js.erb setfiletype javascript
+  autocmd! BufRead,BufNewFile *.cap setfiletype ruby
 
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
@@ -241,6 +243,7 @@ map <Leader>T :call RunNearestSpec()<cr>
 map <Leader>l :call RunLastSpec()<cr>
 map <Leader>a :call RunAllSpecs()<cr>
 map <leader>u :!ruby -I"lib:test" %<cr>
+map <leader>f :!cucumber % -r features KEEP_RUNNING=1<cr>
 
 " run tests with Dispatch
 "let g:rspec_command = "Dispatch rspec {spec}; sleep 1;"

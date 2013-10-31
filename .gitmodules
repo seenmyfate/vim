@@ -43,3 +43,6 @@
 [submodule "bundle/rspec"]
 	path = bundle/rspec
 	url = https://github.com/thoughtbot/vim-rspec.git
+[submodule "bundle/scss-syntax"]
+	path = bundle/scss-syntax
+	url = https://github.com/cakebaker/scss-syntax.vim.git
