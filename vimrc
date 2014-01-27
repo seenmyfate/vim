@@ -44,6 +44,8 @@ augroup vimrcEx
   autocmd! BufRead,BufNewFile *.scss setfiletype scss
   autocmd! BufRead,BufNewFile *.js.erb setfiletype javascript
   autocmd! BufRead,BufNewFile *.cap setfiletype ruby
+  autocmd! BufRead,BufNewFile *.go setfiletype go
+  autocmd FileType go compiler go
 
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
@@ -243,7 +245,7 @@ map <Leader>T :call RunNearestSpec()<cr>
 map <Leader>l :call RunLastSpec()<cr>
 map <Leader>a :call RunAllSpecs()<cr>
 map <leader>u :!ruby -I"lib:test" %<cr>
-map <leader>f :!cucumber % -r features KEEP_RUNNING=1<cr>
+map <leader>f :!bundle exec cucumber % -r features KEEP_RUNNING=1<cr>
 
 " run tests with Dispatch
 "let g:rspec_command = "Dispatch rspec {spec}; sleep 1;"
