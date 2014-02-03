@@ -44,6 +44,7 @@ augroup vimrcEx
   autocmd! BufRead,BufNewFile *.scss setfiletype scss
   autocmd! BufRead,BufNewFile *.js.erb setfiletype javascript
   autocmd! BufRead,BufNewFile *.cap setfiletype ruby
+  autocmd! BufRead,BufNewFile *.feature setfiletype cucumber
   autocmd! BufRead,BufNewFile *.go setfiletype go
   autocmd FileType go compiler go
 
@@ -182,7 +183,7 @@ map <leader>/ :Ack<space>
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Powerline
-let g:Powerline_symbols = 'fancy'
+let g:airline_powerline_fonts = 1
 
 " Open Markdown files in Marked.app
 nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>:redraw!<cr>
