@@ -21,7 +21,8 @@ set tabstop=2 shiftwidth=2      " a tab is two spaces
 set expandtab                   " use spaces
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set scrolloff=999               " Keep the cursor in the middle of the screen
-"set noesckeys                   " no arrow keys in insert mode
+set mouse=a                     " scroll with mouse
+set noesckeys                   " no arrow keys in insert mode
 
 " Store temporary files in a central spot
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -184,6 +185,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Powerline
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'solarized'
 
 " Open Markdown files in Marked.app
 nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>:redraw!<cr>
