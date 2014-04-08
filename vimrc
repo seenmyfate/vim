@@ -21,7 +21,6 @@ set tabstop=2 shiftwidth=2      " a tab is two spaces
 set expandtab                   " use spaces
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set scrolloff=999               " Keep the cursor in the middle of the screen
-set mouse=a                     " scroll with mouse
 set noesckeys                   " no arrow keys in insert mode
 
 " Store temporary files in a central spot
@@ -139,9 +138,6 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-" edit in same dir
-map <leader>e :edit %%
-
 " Remap shift key failure
 command! W :w
 command! Wq :wq
@@ -192,6 +188,17 @@ nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>:redraw!<cr>
 
 " Run
 map <leader>r :!ruby % -v<cr>
+
+" Easy align
+"   vip<Enter>=
+"   `v`isual-select `i`nner `p`aragraph
+"   Start EasyAlign command (<Enter>)
+"   Align around =
+vmap <Enter>   <Plug>(EasyAlign)
+" <Leader>aip=
+"   Start EasyAlign command (<Leader>a) for `i`nner `p`aragraph
+"   Align around =
+map <leader>e <Plug>(EasyAlign)
 
 " Map keys to go to specific files
 map <leader>gr :topleft :split config/routes.rb<cr>
