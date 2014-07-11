@@ -46,6 +46,7 @@ augroup vimrcEx
   autocmd! BufRead,BufNewFile *.cap setfiletype ruby
   autocmd! BufRead,BufNewFile *.feature setfiletype cucumber
   autocmd! BufRead,BufNewFile *.go setfiletype go
+  autocmd! BufRead,BufNewFile *.pp setfiletype ruby
   autocmd FileType go compiler go
 
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
@@ -250,16 +251,15 @@ endfunction
 nnoremap <leader>. :call OpenTestAlternate()<cr>
 
 " Running tests
-map <Leader>t :call RunCurrentSpecFile()<cr>
-map <Leader>T :call RunNearestSpec()<cr>
-map <Leader>l :call RunLastSpec()<cr>
-map <Leader>a :call RunAllSpecs()<cr>
-map <leader>u :!ruby -I"lib:test" %<cr>
-map <leader>f :!bundle exec cucumber % -r features KEEP_RUNNING=1<cr>
+map <Leader>t :call RunCurrentSpecFile()<cr>:redraw!<cr>
+map <Leader>T :call RunNearestSpec()<cr>:redraw!<cr>
+map <Leader>l :call RunLastSpec()<cr>:redraw!<cr>
+map <Leader>a :call RunAllSpecs()<cr>:redraw!<cr>
+map <leader>u :!ruby -I"lib:test" %<cr>:redraw!<cr>
+map <leader>f :!bundle exec cucumber % -r features KEEP_RUNNING=1<cr>:redraw!<cr>
 
 " run tests with Dispatch
-"let g:rspec_command = "Dispatch rspec {spec}; sleep 1;"
-let g:rspec_command = "!bundle exec rspec {spec}"
+let g:rspec_command = 'silent !echo bundle exec rspec --color {spec} > .test_commands'
 
  " When editing a file, always jump to the last known cursor position.
 autocmd BufReadPost *
@@ -281,4 +281,3 @@ augroup BWCCreateDir
   autocmd!
   autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
-
