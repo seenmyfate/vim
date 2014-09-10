@@ -165,7 +165,8 @@ inoremap <Up> <nop>
 inoremap <Down> <nop>
 
 " ctrl-p buffer search
-:nmap ; :CtrlPBuffer<CR>
+nmap ; :CtrlPBuffer<CR>
+nmap ' :CtrlPClearCache<CR>
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 " Plugin mappings
@@ -281,3 +282,6 @@ augroup BWCCreateDir
   autocmd!
   autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
+
+" Record session
+autocmd VimEnter * Obsess
