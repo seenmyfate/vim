@@ -115,6 +115,9 @@ map <leader>pp :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<cr>
 " symbolize string
 map <leader>ps :%s/[''"]\(\w\+\)[''"]/:\1/g<cr>
 
+" Format JSON
+map <leader>j :%!python -m json.tool
+
 " clear the search buffer
 nnoremap <CR> :nohlsearch<cr>
 
@@ -257,10 +260,11 @@ map <Leader>T :call RunNearestSpec()<cr>:redraw!<cr>
 map <Leader>l :call RunLastSpec()<cr>:redraw!<cr>
 map <Leader>a :call RunAllSpecs()<cr>:redraw!<cr>
 map <leader>u :!ruby -I"lib:test" %<cr>:redraw!<cr>
-map <leader>f :!bundle exec cucumber % -r features KEEP_RUNNING=1<cr>:redraw!<cr>
+map <leader>f :!bundle exec cucumber % -r features<cr>:redraw!<cr>
 
 " run tests with Dispatch
 let g:rspec_command = 'silent !echo bundle exec rspec --color {spec} > .test_commands'
+"let g:rspec_command = 'silent !echo bundle exec spec --color {spec} > .test_commands'
 
  " When editing a file, always jump to the last known cursor position.
 autocmd BufReadPost *
