@@ -167,10 +167,8 @@ inoremap <Right> <nop>
 inoremap <Up> <nop>
 inoremap <Down> <nop>
 
-" ctrl-p buffer search
-nmap ; :CtrlPBuffer<CR>
-nmap ' :CtrlPClearCache<CR>
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+map <leader>5 :ClearCtrlPCache<cr>
 
 " Plugin mappings
 " Fugutive shortcuts
@@ -260,7 +258,7 @@ map <Leader>T :call RunNearestSpec()<cr>:redraw!<cr>
 map <Leader>l :call RunLastSpec()<cr>:redraw!<cr>
 map <Leader>a :call RunAllSpecs()<cr>:redraw!<cr>
 map <leader>u :!ruby -I"lib:test" %<cr>:redraw!<cr>
-map <leader>f :!bundle exec cucumber % -r features<cr>:redraw!<cr>
+map <leader>f :silent !echo bundle exec cucumber % -r features > .test_commands<cr>:redraw!<cr>
 
 " run tests with Dispatch
 let g:rspec_command = 'silent !echo bundle exec rspec --color {spec} > .test_commands'
