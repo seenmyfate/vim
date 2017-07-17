@@ -64,7 +64,7 @@ set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 set wildmenu                    " enhanced command line completion
-set wildignore+=*.o,*.obj,.bundle,coverage,doc,.DS_Store,_html,.git,*.rbc,*.class,.svn,vendor/gems/*,vendor/rails/*
+set wildignore+=*.o,*.obj,.bundle,coverage,doc,.DS_Store,_html,.git,*.rbc,*.class,.svn,vendor/gems/*,vendor/rails/*,_build,*.so,*.swp,*.zip
 set complete=.,w,b,u,t          " don't complete with included files (i)
 set foldmethod=manual           " for super fast autocomplete
 
@@ -284,6 +284,3 @@ augroup BWCCreateDir
   autocmd!
   autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
-
-" Record session
-autocmd VimEnter * Obsess

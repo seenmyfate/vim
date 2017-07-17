@@ -55,9 +55,15 @@
 [submodule "bundle/easy-align"]
 	path = bundle/easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
-[submodule "bundle/obsession"]
-	path = bundle/obsession
-	url = git://github.com/tpope/vim-obsession.git
 [submodule "bundle/large_file"]
 	path = bundle/large_file
 	url = https://github.com/vim-scripts/LargeFile.git
+[submodule "bundle/elixir"]
+	path = bundle/elixir
+	url = https://github.com/elixir-lang/vim-elixir.git
+[submodule "bundle/phoenix"]
+	path = bundle/phoenix
+	url = https://github.com/avdgaag/vim-phoenix.git
+[submodule "bundle/airline-themes"]
+	path = bundle/airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes
