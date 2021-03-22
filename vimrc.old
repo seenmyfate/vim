@@ -1,33 +1,19 @@
-call plug#begin('~/.vim/plugged')
+" github.com/garybernhardt/dotfiles
+" github.com/mislav/vimfiles
+" vimcasts.org
+" vim.wikia.com
+" for more info on any settings
+" :help <command> eg
+" :help showcmd
 
-Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'mileszs/ack.vim'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'thoughtbot/vim-rspec'
-Plug 'altercation/vim-colors-solarized'
-Plug 'easymotion/vim-easymotion'
-Plug 'wincent/terminus'
-Plug 'jparise/vim-graphql'
-Plug 'previm/previm'
-Plug 'tyru/open-browser.vim'
-
-call plug#end()
-
+call pathogen#infect()          " load pathogen
 set nocompatible                " choose no compatibility with legacy vi
 set encoding=utf-8              " sensible encoding
 set showcmd                     " display incomplete commands
 filetype plugin indent on       " load file type plugins + indentation
 set number                      " need those line numbers
 set ruler                       " show the line/column number of the cursor position
-set clipboard=unnamedplus       " yank to system clipboard
-
+set shell=sh                    " hack for rvm
 "" Whitespace
 set nowrap                      " wrap lines, switch with set wrap/nowrap
 set linebreak                   " break line for wrapping at end of a word
@@ -35,9 +21,7 @@ set tabstop=2 shiftwidth=2      " a tab is two spaces
 set expandtab                   " use spaces
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set scrolloff=999               " Keep the cursor in the middle of the screen
-if !has('nvim')
-  set noesckeys                   " no arrow keys in insert mode
-endif
+set noesckeys                   " no arrow keys in insert mode
 
 " Store temporary files in a central spot
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -55,7 +39,7 @@ augroup vimrcEx
     \ endif
 
   "for ruby, autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,haml,yaml,html,javascript,cucumber set ai sw=2 sts=2 et
+  autocmd FileType ruby,haml,eruby,yaml,html,javascript,cucumber set ai sw=2 sts=2 et
 
   autocmd! BufRead,BufNewFile *.scss setfiletype scss
   autocmd! BufRead,BufNewFile *.js.erb setfiletype javascript
@@ -66,7 +50,12 @@ augroup vimrcEx
   autocmd FileType go compiler go
 
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
+  autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
+  autocmd FileType markdown setlocal wrap
   autocmd FileType qf setlocal wrap
+
+  " Indent p tags
+  autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
 augroup END
 
 "" Searching
@@ -80,9 +69,7 @@ set complete=.,w,b,u,t          " don't complete with included files (i)
 set foldmethod=manual           " for super fast autocomplete
 
 "" Colors
-if !has('nvim')
-  set term=xterm-256color
-endif
+set term=xterm-256color
 syntax enable
 set background=dark             " or light
 colorscheme solarized           " can't work with anything else
@@ -96,6 +83,7 @@ highlight SpecialKey guifg=#444444
 " Window
 set cmdheight=2                 " number of lines for the command line
 set laststatus=2                " always have a status line
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 set showtabline=2               " always show tab bar
 set winwidth=84                 "
 set colorcolumn=80              " highlight at 80 characters
@@ -103,24 +91,20 @@ set colorcolumn=80              " highlight at 80 characters
 " Mappings
 let mapleader=","               " use , as leader instead of backslash
 
-" ctrl-p
-map <C-p> :FZF<CR>
-
 " CTags
 " navigate with <c-]> / <c-t>
-map <Leader>ct :!ctags --exclude=public --exclude=node_modules --exclude=spec --exclude=_html --exclude=tmp --exclude=log --exclude=coverage --extra=+f -R *<CR><CR>
-
+map <Leader>ct :!ctags --exclude=public --exclude=spec --exclude=_html --exclude=tmp --exclude=log --exclude=coverage --extra=+f -R *<CR><CR>
+map <C-\> :tnext<CR>
+map <C-'> :tprev<CR>
 " exclude javascript files
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
-" Tabs
-nmap T :tabnew<cr>
+" navigate buffers
+nmap <C-n> :bnext<CR>
+nmap <C-b> :bprev<CR>
 
 " switch most recent buffers
 nnoremap <leader><leader> <c-^>
-
-" Easymotion
-map <Leader> <Plug>(easymotion-prefix)
 
 " remove whitespace
 map <leader>s :%s/\s\+$//<CR>
@@ -161,7 +145,7 @@ nnoremap <c-l> <c-w>l
 " Remap shift key failure
 command! W :w
 command! Wq :wq
-command! Ex :Explore
+command! E :e
 
 " Retain indent when pasting code
 nnoremap <leader>pt :set invpaste paste?<CR>
@@ -183,6 +167,9 @@ inoremap <Right> <nop>
 inoremap <Up> <nop>
 inoremap <Down> <nop>
 
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+map <leader>5 :ClearCtrlPCache<cr>
+
 " Plugin mappings
 " Fugutive shortcuts
 map :gs :Gstatus<cr>
@@ -193,11 +180,14 @@ map :gd :Gdiff<cr>
 map <leader>/ :Ack<space>
 
 " Use the silver searcher
-let g:ackprg = 'ag --nogroup --nocolor --column --workers=1'
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Powerline
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'solarized'
+
+" Open Markdown files in Marked.app
+nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>:redraw!<cr>
 
 " Run
 map <leader>r :!ruby % -v<cr>
@@ -212,6 +202,27 @@ vmap <Enter>   <Plug>(EasyAlign)
 "   Start EasyAlign command (<Leader>a) for `i`nner `p`aragraph
 "   Align around =
 map <leader>e <Plug>(EasyAlign)
+
+" Map keys to go to specific files
+map <leader>gr :topleft :split config/routes.rb<cr>
+function! ShowRoutes()
+  " Requires 'scratch' plugin
+  :topleft 100 :split __Routes__
+  " Make sure Vim doesn't write __Routes__ as a file
+  :set buftype=nofile
+  " Delete everything
+  :normal 1GdG
+  " Put routes output in buffer
+  :0r! rake -s routes
+  " Size window to number of lines (1 plus rake output length)
+  :exec ":normal " . line("$") . "_ "
+  " Move cursor to bottom
+  :normal 1GG
+  " Delete empty trailing line
+  :normal dd
+endfunction
+map <leader>gR :call ShowRoutes()<cr>
+map <leader>gg :topleft 100 :split Gemfile<cr>
 
 " Switch between test and production code
 function! OpenTestAlternate()
@@ -247,6 +258,7 @@ map <Leader>T :call RunNearestSpec()<cr>:redraw!<cr>
 map <Leader>l :call RunLastSpec()<cr>:redraw!<cr>
 map <Leader>a :call RunAllSpecs()<cr>:redraw!<cr>
 map <leader>u :!ruby -I"lib:test" %<cr>:redraw!<cr>
+map <leader>f :silent !echo bundle exec cucumber % -r features > .test_commands<cr>:redraw!<cr>
 
 " run tests with Dispatch
 let g:rspec_command = 'silent !echo bundle exec rspec --color {spec} > .test_commands'
@@ -272,14 +284,3 @@ augroup BWCCreateDir
   autocmd!
   autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
-
-let g:github_enterprise_urls = ['https://github.otbeach.com']
-map <Leader>g :Gbrowse<cr>
-
-augroup PrevimSettings
-    autocmd!
-    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-augroup END
-
-map <leader>o :PrevimOpen<cr>
-map <leader>c :!bundle exec cucumber<cr>
